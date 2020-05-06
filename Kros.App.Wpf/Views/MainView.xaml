@@ -1,0 +1,100 @@
+﻿<mah:MetroWindow
+    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+    x:Class="Kros.App.Wpf.MainView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextElement.FontWeight="Regular"
+    TextElement.FontSize="13"
+    TextOptions.TextFormattingMode="Ideal" 
+    TextOptions.TextRenderingMode="Auto"        
+    Background="{DynamicResource MaterialDesignPaper}"
+    FontFamily="{DynamicResource MaterialDesignFont}"
+    WindowTitleBrush="{DynamicResource PrimaryHueDarkBrush}"
+    NonActiveWindowTitleBrush="{DynamicResource PrimaryHueDarkBrush}"
+    WindowStartupLocation="CenterScreen"
+    SaveWindowPosition="False"
+    ResizeBorderThickness="5"
+    BorderThickness="0"
+    
+    GlowBrush="Black"
+    Title="{Binding Title}"
+    mc:Ignorable="d"
+    Height="700"
+    Width="1300">
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Width" Value="40" />
+            <Setter Property="Margin" Value="5" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="0.8*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="0.2*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" DataContext="{Binding Filter}">
+            <TextBlock Text="Фильтр по ID" />
+            <TextBox Width="60" Height="25" Text="{Binding Id, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock Text="Фильтр по Модель" />
+            <TextBox Width="160" Height="25" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" />
+        </StackPanel>
+
+        <DataGrid Grid.Row="1" Grid.Column="0" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="0,0,0,0" Name="dataGrid1" VerticalAlignment="Top" ItemsSource="{Binding Phones}" SelectedItem="{Binding SelectedPhone, Mode=TwoWay}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Width="40" Binding="{Binding Id}"></DataGridTextColumn>
+                <DataGridTextColumn Header="TitleWithCompany" Width="100" Binding="{Binding TitleWithCompany}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Title" Width="100" Binding="{Binding Title}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Company" Width="100" Binding="{Binding Company}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Price" Width="100" Binding="{Binding Price}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Matrix" Binding="{Binding Display.Matrix}" Width="2*" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" DataContext="{Binding SelectedPhone}">
+            <TextBlock Text="Выбранный элемент"  />
+            <TextBlock Text="ID" />
+            <TextBox Text="{Binding Id, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock Text="Модель" />
+            <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock Text="Производитель" />
+            <TextBox Text="{Binding Company, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock Text="Цена" />
+            <TextBox Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}" />
+
+            <StackPanel DataContext="{Binding Display}">
+                <TextBlock Text="Выбранный элемент"  />
+                <TextBlock Text="ID" />
+                <TextBox Text="{Binding Id}" />
+                <TextBlock Text="Matrix" />
+                <TextBox Text="{Binding Matrix}" />
+                <TextBlock Text="Size" />
+                <TextBox Text="{Binding Size}" />
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal">
+            <Button Width="150" Command="{Binding RefreshCommand}" Content="{Binding CountPhones}"/>
+            <Button Width="150" Command="{Binding EditCommand}" Content="Edit"/>
+            <Button Width="150" Command="{Binding TestCommand}" Content="Change Title"/>
+            <Button Width="150" Command="{Binding ConfirmCommand}" Content="Confirm"/>
+            <Button Width="150" Command="{Binding OpenFilesCommand}" Content="Open Files"/>
+            <Button Width="150" Command="{Binding OpenFolderCommand}" Content="Open Folder"/>
+        </StackPanel>
+    </Grid>
+</mah:MetroWindow>

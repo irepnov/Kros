@@ -1,0 +1,74 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Kros.App.Avalonia.Views.MainView"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="{Binding Title}">
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*" />
+      <ColumnDefinition Width="0.8*" />
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="0.1*" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="0.2*" />
+    </Grid.RowDefinitions>
+
+    <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" DataContext="{Binding Filter}">
+      <TextBlock Text="Фильтр по ID" />
+      <TextBox Width="60" Height="25" Text="{Binding Id}" />
+      <TextBlock Text="Фильтр по Модель" />
+      <TextBox Width="160" Height="25" Text="{Binding Title}" />
+    </StackPanel>
+
+    <DataGrid Grid.Row="1" Grid.Column="0" 
+              CanUserReorderColumns="True" CanUserSortColumns="True" CanUserResizeColumns="True" 
+              Items="{Binding Phones}" SelectedItem="{Binding SelectedPhone, Mode=TwoWay}">
+      <DataGrid.Columns>
+        <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="2*" />
+        <DataGridTextColumn Header="TitleWра апр ithCompany" Width="100" Binding="{Binding TitleWithCompany}"></DataGridTextColumn>
+        <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="2*" />
+        <DataGridTextColumn Header="Company" Binding="{Binding Company}" Width="*" />
+        <DataGridTextColumn Header="Pricee" Binding="{Binding Price}" Width="2*" />
+        <DataGridTextColumn Header="Matrix" Binding="{Binding Display.Matrix}" Width="2*" />
+      </DataGrid.Columns>
+    </DataGrid>
+
+    <StackPanel Grid.Row="1" Grid.Column="1" DataContext="{Binding SelectedPhone}">
+      <TextBlock Text="Информация о матрице"  />
+      <TextBlock Text="ID" />
+      <TextBox Text="{Binding Id}" />
+      <TextBlock Text="Модель" />
+      <TextBox Text="{Binding Title}" />
+      <TextBlock Text="Произчсмвdfsdfодитель" />
+      <TextBox Text="{Binding Company}" />
+      <TextBlock Text="Цена" />
+      <TextBox Text="{Binding Price}" />
+      
+      <StackPanel DataContext="{Binding Display}">
+          <TextBlock Text="Выбранный элемент"  />
+          <TextBlock Text="ID" />
+          <TextBox Text="{Binding Id}" />
+          <TextBlock Text="Matrix" />
+          <TextBox Text="{Binding Matrix}" />
+          <TextBlock Text="Size" />
+          <TextBox Text="{Binding Size}" />
+      </StackPanel>
+    </StackPanel>
+
+    
+
+    <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal">
+      <Button Width="150" Command="{Binding RefreshCommand}" Content="{Binding CountPhones}"/>
+      <Button Width="150" Command="{Binding EditCommand}" Content="Edit"/>
+      <Button Width="150" Command="{Binding TestCommand}" Content="Change Title"/>
+      <Button Width="150" Command="{Binding ConfirmCommand}" Content="Confirm"/>
+      <Button Width="150" Command="{Binding OpenFilesCommand}" Content="Open Files"/>
+    </StackPanel>
+  </Grid>
+
+
+</Window>

@@ -1,0 +1,56 @@
+﻿<Window
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Class="Kros.App.Avalonia.Views.ConfirmDialogView"
+    Classes="Dialog"
+    Icon="/Assets/radish.png"
+    WindowStartupLocation="CenterOwner"
+    SizeToContent="WidthAndHeight"
+    MinWidth="320"
+    MinHeight="104"
+    CanResize="False"
+    Title="{Binding TitleText}"
+    Padding="14,12">
+
+  <Grid
+      Classes="ConfirmDialog"
+      ColumnDefinitions="auto,8,auto,*"
+      RowDefinitions="auto,8,auto,*">
+
+    <Image
+        Classes="DialogIcon"
+        VerticalAlignment="Top"
+        Grid.Row="0"
+        Grid.Column="0"
+        Source="/Assets/X96/Attention.png" />
+
+    <TextBlock
+        Grid.Row="0"
+        Grid.Column="2"
+        Classes="DialogTitle"
+        Text="{Binding MessageText}" />
+
+    <StackPanel
+        Grid.Row="2"
+        Grid.Column="0"
+        Grid.ColumnSpan="4"
+        Orientation="Horizontal"
+        HorizontalAlignment="Right">
+
+      <Button
+          Command="{Binding ConfirmCommand}"
+          Margin="0,0,6,0">
+        <TextBlock
+            Text="{Binding ConfirmText}" />
+      </Button>
+
+      <Button
+          Command="{Binding CancelCommand}">
+        <TextBlock
+            Text="{Binding CancelText}" />
+      </Button>
+
+    </StackPanel>
+
+  </Grid>
+</Window>    

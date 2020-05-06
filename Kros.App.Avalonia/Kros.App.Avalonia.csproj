@@ -1,0 +1,59 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>C:\Users\Repnov\source\repos\Kros\Kros.Build\bin\Debug\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Update="**\*.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <AvaloniaResource Include="**\*.xaml">
+     <!-- <SubType>Designer</SubType>-->
+    </AvaloniaResource>
+    <AvaloniaResource Include="Assets\**" />
+  </ItemGroup>
+  <!-- <ItemGroup>
+    <AvaloniaResource Remove="Views\ConfirmDialogView.xaml" />
+    <AvaloniaResource Remove="Views\EditPhoneView.xaml" />
+    <AvaloniaResource Remove="Views\_ConfirmDialogWindow.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Views\_ConfirmDialogView.xaml.cs" />
+    <Compile Remove="Views\_ConfirmDialogWindow.xaml.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Views\EditPhoneView.xaml" />
+    <None Remove="Views\_ConfirmDialogWindow.xaml" />
+  </ItemGroup>-->
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="0.9.9" />
+    <PackageReference Include="Avalonia.Controls.DataGrid" Version="0.9.9" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.9.9" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.9" />
+    <PackageReference Include="Serilog" Version="2.9.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
+    <PackageReference Include="Serilog.Sinks.File" Version="4.1.0" />
+  </ItemGroup>
+  <!-- <ItemGroup>
+    <EmbeddedResource Include="Views\EditPhoneView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>-->
+  <ItemGroup>
+    <ProjectReference Include="..\Kros.Presentations\Kros.Presentations.csproj" />
+    <ProjectReference Include="..\Kros.Services\Kros.Services.csproj" />
+  </ItemGroup>
+  <!-- <ItemGroup>
+    <Compile Update="Views\ConfirmDialogView.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Views\ConfirmDialogView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+  </ItemGroup>-->
+</Project>

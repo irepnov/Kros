@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <UserSecretsId>a602c72b-733c-4c74-bde4-5c68f8df41df</UserSecretsId>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>C:\Users\Repnov\source\repos\Kros\Kros.Build\bin\Debug</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Models\_ConfirmDialog\**" />
+    <Compile Remove="Models\_ConnectDialog\**" />
+    <Compile Remove="Models\_EditorDialog\**" />
+    <EmbeddedResource Remove="Models\_ConfirmDialog\**" />
+    <EmbeddedResource Remove="Models\_ConnectDialog\**" />
+    <EmbeddedResource Remove="Models\_EditorDialog\**" />
+    <None Remove="Models\_ConfirmDialog\**" />
+    <None Remove="Models\_ConnectDialog\**" />
+    <None Remove="Models\_EditorDialog\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="PropertyChanged.Fody" Version="3.2.6" />
+    <PackageReference Include="ReactiveUI" Version="11.1.23" />
+    <PackageReference Include="ReactiveUI.Fody" Version="11.1.23" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Kros.Services\Kros.Services.csproj" />
+  </ItemGroup>
+
+</Project>

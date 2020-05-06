@@ -1,0 +1,32 @@
+﻿<Window
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Class="Kros.App.Avalonia.Views.EditPhoneView"
+    WindowStartupLocation="CenterOwner"
+    SizeToContent="WidthAndHeight"
+    MinWidth="640"
+    MinHeight="400"
+    Classes="Dialog"
+    Title="{Binding Title}"
+    Padding="10,12">
+    <Grid ColumnDefinitions="auto,*" RowDefinitions="0.1*,*,0.2*">
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="1стр. 1ст." />
+
+        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" DataContext="{Binding SelectedPhone}">
+            <TextBlock Text="ID" />
+            <TextBox Text="{Binding Id}" />
+            <TextBlock Text="Модель" />
+            <TextBox Text="{Binding Title}" />
+            <TextBlock Text="Произчсмвdfsdfодитель" />
+            <TextBox Text="{Binding Company}" />
+            <TextBlock Text="Цена" />
+            <TextBox Text="{Binding Price}" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal">
+            <Button Width="150" Command="{Binding SaveCommand}" Content="Сохранить"/>
+            <Button Width="150" Command="{Binding CancelCommand}" Content="Отмена"/>
+        </StackPanel>
+
+    </Grid>
+</Window>
