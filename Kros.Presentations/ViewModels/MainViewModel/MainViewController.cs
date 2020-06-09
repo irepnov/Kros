@@ -16,7 +16,7 @@ namespace Kros.Presentations
     {
         private readonly IPhoneRepositoryAsync _repository;
         private readonly MainViewModel _model;
-        private readonly IDialogManager _dialogManager;        
+        private readonly IDialogManager _dialogManager;
         public MainViewController(IPhoneRepositoryAsync repository, IDialogManager dialogManager)
         {
             _repository = repository;
@@ -25,6 +25,12 @@ namespace Kros.Presentations
         public MainViewController(MainViewModel model)
             : this(Locator.Current.GetService<IPhoneRepositoryAsync>(),
                    Locator.Current.GetService<IDialogManager>())
+        {
+            _model = model;
+        }
+        public MainViewController(IPhoneRepositoryAsync repository, IDialogManager dialogManager, MainViewModel model)
+            : this(repository,
+                   dialogManager)
         {
             _model = model;
         }

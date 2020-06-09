@@ -37,6 +37,25 @@ namespace Kros.Presentations
         public ReactiveCommand<Unit, bool> ConfirmCommand { get; set; }
         public ReactiveCommand<Unit, string[]> OpenFilesCommand { get; set; }
         public ReactiveCommand<Unit, string> OpenFolderCommand { get; set; }
+        public MainViewModel(IPhoneRepositoryAsync repository, IDialogManager dialogManager)
+        {
+            MainViewController _controller = new MainViewController(repository, dialogManager, this);
+            this.WhenActivated(disposables =>
+            {
+                _controller.BindTitle().DisposeWith(disposables);
+                _controller.BindRefreshFilter().DisposeWith(disposables);
+                _controller.BindRefreshCommand().DisposeWith(disposables);
+                _controller.BindTestCommand().DisposeWith(disposables);
+                _controller.BindEditCommand().DisposeWith(disposables);
+                _controller.BindConfirmCommand().DisposeWith(disposables);
+                _controller.BindOpenFilesCommand().DisposeWith(disposables);
+                _controller.BindOpenFolderCommand().DisposeWith(disposables);
+                RefreshCommand.Execute().Subscribe(phones => {
+                    var m = this;
+                    //то что сделать после обработки по умолчанию
+                }).DisposeWith(disposables);
+            });
+        }
         public MainViewModel()
         {
             MainViewController _controller = new MainViewController(this);

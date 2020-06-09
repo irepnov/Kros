@@ -18,13 +18,13 @@ namespace Kros.Testing
         private readonly IPhoneRepositoryAsync repos;
         private readonly MainViewModel model;
 
-        /*
         public MainViewModelTest()
         {
             ApplicationContext context = new ApplicationContext();
             repos = new PhoneRepositoryAsync(context);
-            model = new MainViewModel(repos, RxApp.MainThreadScheduler);            
+          //  model = new MainViewModel(repos, new DialogManager(new DialogProvider(typeof(App).Assembly)) )
         }
+        /*
 
         [Fact]
         public void InitModel()
