@@ -42,11 +42,15 @@ namespace Kros.Services
         public IQueryable<T> GetAsQueryable(List<Expression<Func<T, bool>>> predicates = null, params Expression<Func<T, object>>[] includes)
         {
             IQueryable<T> query = Context.Set<T>().AsQueryable<T>();
-            foreach (Expression<Func<T, object>> include in includes)
+            /* foreach (Expression<Func<T, object>> include in includes)
+             {
+                 MemberExpression memberExpression = include.Body as MemberExpression;
+                 if (memberExpression != null)
+                     query = query.Include(memberExpression.Member.Name);            
+             }*/
+            if (includes != null)
             {
-                MemberExpression memberExpression = include.Body as MemberExpression;
-                if (memberExpression != null)
-                    query = query.Include(memberExpression.Member.Name);            
+                query = includes.Aggregate(query, (current, item) => EvaluateInclude(current, item));
             }
 
             Expression<Func<T, bool>> expresCombined = null;            
@@ -61,7 +65,30 @@ namespace Kros.Services
 
             return expresCombined != null ? query.Where(expresCombined).AsNoTracking() : query.AsNoTracking();
         }
-            //=> Context.Set<T>().AsNoTracking();
+        //=> Context.Set<T>().AsNoTracking();
+
+        private IQueryable<T> EvaluateInclude(IQueryable<T> current, Expression<Func<T, object>> item)
+        {
+            if (item.Body is MethodCallExpression)
+            {
+                var arguments = ((MethodCallExpression)item.Body).Arguments;
+                if (arguments.Count > 1)
+                {
+                    var navigationPath = string.Empty;
+                    for (var i = 0; i < arguments.Count; i++)
+                    {
+                        var arg = arguments[i];
+                        var path = arg.ToString().Substring(arg.ToString().IndexOf('.') + 1);
+
+                        navigationPath += (i > 0 ? "." : string.Empty) + path;
+                    }
+                    return current.Include(navigationPath);
+                }
+            }
+
+            return current.Include(item);
+        }
+
 
         public async Task<T> GetById(int id) => await Context.Set<T>().FindAsync(id);
 

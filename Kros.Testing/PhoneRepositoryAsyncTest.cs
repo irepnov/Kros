@@ -51,7 +51,8 @@ namespace Kros.Testing
             IEnumerable<Phone> allEnumResultInclude = await repos.GetAsEnumerable(
                 filter, 
                 p => p.Display
-                //можно добавить еще всякие дополнительные сущьности
+
+                //можно добавить еще всякие дополнительные сущьности  p => p.Display.Select(d => d.DisplayType)
                 );
             Assert.NotNull(allEnumResultInclude);
 
